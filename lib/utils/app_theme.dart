@@ -122,7 +122,7 @@ class AppTheme {
   static LinearGradient getCategoryGradient(String category) {
     final color = getCategoryColor(category);
     return LinearGradient(
-      colors: [color, color.withOpacity(0.7)],
+      colors: [color, color.withValues(alpha: 0.7)],
       begin: Alignment.topLeft,
       end: Alignment.bottomRight,
     );
@@ -135,7 +135,7 @@ class AppTheme {
       borderRadius: BorderRadius.circular(12),
       boxShadow: [
         BoxShadow(
-          color: Colors.black.withOpacity(0.1),
+          color: Colors.black.withValues(alpha: 0.1),
           blurRadius: 10,
           offset: const Offset(0, 4),
         ),

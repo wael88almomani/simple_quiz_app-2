@@ -149,7 +149,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                   Container(
                     width: 1,
                     height: 40,
-                    color: AppTheme.textLight.withOpacity(0.3),
+                    color: AppTheme.textLight.withValues(alpha: 0.3),
                   ),
                   _buildStatItem(
                     'Average Score',
@@ -195,7 +195,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
           label,
           style: TextStyle(
             fontSize: 14,
-            color: AppTheme.textLight.withOpacity(0.9),
+            color: AppTheme.textLight.withValues(alpha: 0.9),
           ),
         ),
       ],
@@ -226,7 +226,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       vertical: 6,
                     ),
                     decoration: BoxDecoration(
-                      color: categoryColor.withOpacity(0.1),
+                      color: categoryColor.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(20),
                       border: Border.all(color: categoryColor),
                     ),
@@ -261,7 +261,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
                       Container(
                         padding: const EdgeInsets.all(8),
                         decoration: BoxDecoration(
-                          color: color.withOpacity(0.1),
+                          color: color.withValues(alpha: 0.1),
                           shape: BoxShape.circle,
                         ),
                         child: Icon(
@@ -302,8 +302,8 @@ class _HistoryScreenState extends State<HistoryScreen> {
                     ),
                     decoration: BoxDecoration(
                       color: result.difficulty == 'Easy'
-                          ? Colors.green.withOpacity(0.1)
-                          : Colors.red.withOpacity(0.1),
+                          ? Colors.green.withValues(alpha: 0.1)
+                          : Colors.red.withValues(alpha: 0.1),
                       borderRadius: BorderRadius.circular(20),
                     ),
                     child: Row(

@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'package:flutter/foundation.dart';
 import 'package:http/http.dart' as http;
 import '../models/question_model.dart';
 import '../data/fallback_questions.dart';
@@ -27,7 +28,7 @@ class AIService {
       return _getFallbackQuestions(category, difficulty);
     } catch (e) {
       // Fallback on any error
-      print('AI Service Error: $e. Using fallback questions.');
+      debugPrint('AI Service Error: $e. Using fallback questions.');
       return _getFallbackQuestions(category, difficulty);
     }
   }
@@ -124,7 +125,7 @@ Return ONLY the JSON array, no additional text.
           .map((json) => QuestionModel.fromJson(json as Map<String, dynamic>))
           .toList();
     } catch (e) {
-      print('Error parsing AI response: $e');
+      debugPrint('Error parsing AI response: $e');
       return [];
     }
   }

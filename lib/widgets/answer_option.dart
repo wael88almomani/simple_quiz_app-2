@@ -49,7 +49,7 @@ class AnswerOption extends StatelessWidget {
             boxShadow: isSelected
                 ? [
                     BoxShadow(
-                      color: AppTheme.primaryColor.withOpacity(0.3),
+                      color: AppTheme.primaryColor.withValues(alpha: 0.3),
                       blurRadius: 8,
                       offset: const Offset(0, 4),
                     ),
@@ -65,7 +65,7 @@ class AnswerOption extends StatelessWidget {
                 decoration: BoxDecoration(
                   color: isSelected
                       ? AppTheme.textLight
-                      : AppTheme.primaryColor.withOpacity(0.1),
+                      : AppTheme.primaryColor.withValues(alpha: 0.1),
                   shape: BoxShape.circle,
                 ),
                 child: Center(

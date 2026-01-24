@@ -76,10 +76,12 @@ class _ResultScreenState extends State<ResultScreen>
     final message = AppConstants.getScoreMessage(percentage);
     final color = _getScoreColor(percentage);
 
-    return WillPopScope(
-      onWillPop: () async {
-        _navigateToHome();
-        return false;
+    return PopScope(
+      canPop: false,
+      onPopInvokedWithResult: (didPop, result) {
+        if (!didPop) {
+          _navigateToHome();
+        }
       },
       child: Scaffold(
         appBar: AppBar(
@@ -98,7 +100,7 @@ class _ResultScreenState extends State<ResultScreen>
                     child: Container(
                       padding: const EdgeInsets.all(32),
                       decoration: BoxDecoration(
-                        color: color.withOpacity(0.1),
+                        color: color.withValues(alpha: 0.1),
                         shape: BoxShape.circle,
                         border: Border.all(color: color, width: 4),
                       ),
