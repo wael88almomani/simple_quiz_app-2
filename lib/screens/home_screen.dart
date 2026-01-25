@@ -4,6 +4,7 @@ import '../utils/constants.dart';
 import '../services/hive_service.dart';
 import 'level_screen.dart';
 import 'history_screen.dart';
+import 'about_screen.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -28,6 +29,16 @@ class _HomeScreenState extends State<HomeScreen> {
               );
             },
             tooltip: 'View History',
+          ),
+          IconButton(
+            icon: const Icon(Icons.info_outline),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const AboutScreen()),
+              );
+            },
+            tooltip: 'About Us',
           ),
         ],
       ),
