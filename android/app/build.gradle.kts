@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.exammaster.quizapp"
+    namespace = "com.waelalmomani.exacode"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -21,7 +21,7 @@ android {
 
     defaultConfig {
         // Unique Application ID for Google Play
-        applicationId = "com.exammaster.quizapp"
+        applicationId = "com.waelalmomani.exacode"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

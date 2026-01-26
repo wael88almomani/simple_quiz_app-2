@@ -4,8 +4,8 @@ import '../data/fallback_questions.dart';
 /// Service for loading quiz questions from local data
 /// Returns pre-defined questions based on category and difficulty
 class AIService {
-  /// Generates 20 quiz questions based on category and difficulty
-  /// Returns questions from local data bank
+  /// Generates 30 quiz questions based on category and difficulty
+  /// Returns questions from local data bank in random order
   Future<List<QuestionModel>> generateQuestions({
     required String category,
     required String difficulty,

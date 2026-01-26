@@ -58,7 +58,7 @@ This will automatically generate icons for:
 
 ## 💡 Quick Temporary Solution
 
-If you need to test immediately, I can create a simple placeholder icon with text "EM2" (Exam Master 2) using code.
+If you need to test immediately, I can create a simple placeholder icon with text "EC" (ExaCode) using code.
 
 ---
 

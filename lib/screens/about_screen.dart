@@ -185,7 +185,7 @@ class AboutScreen extends StatelessWidget {
                   const Divider(),
                   const SizedBox(height: 16),
                   Text(
-                    '© ${DateTime.now().year} Exam Master. All rights reserved.',
+                    '© ${DateTime.now().year} ExaCode. All rights reserved.',
                     style: const TextStyle(
                       fontSize: 14,
                       color: AppTheme.textSecondary,

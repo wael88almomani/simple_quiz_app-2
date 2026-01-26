@@ -1,24 +1,40 @@
 import '../models/question_model.dart';
 
 /// Local question bank used when AI service is unavailable
-/// Provides 20 questions per category and difficulty level
+/// Provides 30 questions per category and difficulty level
 class FallbackQuestions {
   static List<QuestionModel> getQuestions(String category, String difficulty) {
+    // Shuffle questions to ensure randomness for each exam session
+    List<QuestionModel> questions;
     switch (category.toUpperCase()) {
       case 'SQL':
-        return difficulty == 'Easy' ? _sqlEasy : _sqlHard;
+        questions = difficulty == 'Easy'
+            ? List.from(_sqlEasy)
+            : List.from(_sqlHard);
+        break;
       case 'FLUTTER':
-        return difficulty == 'Easy' ? _flutterEasy : _flutterHard;
+        questions = difficulty == 'Easy'
+            ? List.from(_flutterEasy)
+            : List.from(_flutterHard);
+        break;
       case 'DART':
-        return difficulty == 'Easy' ? _dartEasy : _dartHard;
-      case 'GENERAL PROGRAMMING':
-        return difficulty == 'Easy' ? _generalEasy : _generalHard;
+        questions = difficulty == 'Easy'
+            ? List.from(_dartEasy)
+            : List.from(_dartHard);
+        break;
+      case 'PYTHON':
+        questions = difficulty == 'Easy'
+            ? List.from(_pythonEasy)
+            : List.from(_pythonHard);
+        break;
       default:
-        return _generalEasy;
+        questions = List.from(_pythonEasy);
     }
+    questions.shuffle();
+    return questions;
   }
 
-  // SQL Easy Questions
+  // SQL Easy Questions (30 questions)
   static final List<QuestionModel> _sqlEasy = [
     QuestionModel(
       question: 'What does SQL stand for?',
@@ -52,17 +68,6 @@ class FallbackQuestions {
     ),
     QuestionModel(
       question:
-          'With SQL, how do you select a column named "FirstName" from a table named "Persons"?',
-      options: [
-        'SELECT Persons.FirstName',
-        'SELECT FirstName FROM Persons',
-        'EXTRACT FirstName FROM Persons',
-        'GET FirstName FROM Persons',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question:
           'With SQL, how do you select all the columns from a table named "Persons"?',
       options: [
         'SELECT *.Persons',
@@ -73,34 +78,8 @@ class FallbackQuestions {
       correctAnswerIndex: 2,
     ),
     QuestionModel(
-      question:
-          'With SQL, how can you return the number of records in the "Persons" table?',
-      options: [
-        'SELECT COUNT(*) FROM Persons',
-        'SELECT NUMBER(*) FROM Persons',
-        'SELECT LEN(*) FROM Persons',
-        'SELECT RECORDS FROM Persons',
-      ],
-      correctAnswerIndex: 0,
-    ),
-    QuestionModel(
       question: 'Which SQL keyword is used to sort the result-set?',
       options: ['SORT', 'ORDER BY', 'SORT BY', 'ORDER'],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'Which SQL statement is used to create a new table?',
-      options: ['CREATE TABLE', 'NEW TABLE', 'MAKE TABLE', 'BUILD TABLE'],
-      correctAnswerIndex: 0,
-    ),
-    QuestionModel(
-      question: 'What is the correct SQL syntax for inserting a new record?',
-      options: [
-        'INSERT VALUES INTO table_name',
-        'INSERT INTO table_name VALUES',
-        'ADD INTO table_name VALUES',
-        'INSERT table_name VALUES',
-      ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
@@ -115,22 +94,6 @@ class FallbackQuestions {
         'Returns only unique values',
         'Deletes duplicate records',
         'Counts records',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question:
-          'Which SQL JOIN returns all records when there is a match in either table?',
-      options: ['INNER JOIN', 'LEFT JOIN', 'FULL OUTER JOIN', 'RIGHT JOIN'],
-      correctAnswerIndex: 2,
-    ),
-    QuestionModel(
-      question: 'What is the purpose of the SQL GROUP BY statement?',
-      options: [
-        'To sort data',
-        'To group rows that have the same values',
-        'To filter data',
-        'To join tables',
       ],
       correctAnswerIndex: 1,
     ),
@@ -160,6 +123,11 @@ class FallbackQuestions {
       correctAnswerIndex: 2,
     ),
     QuestionModel(
+      question: 'Which SQL statement is used to create a new table?',
+      options: ['CREATE TABLE', 'NEW TABLE', 'MAKE TABLE', 'BUILD TABLE'],
+      correctAnswerIndex: 0,
+    ),
+    QuestionModel(
       question: 'Which SQL statement is used to add a new column to a table?',
       options: [
         'ADD COLUMN',
@@ -169,9 +137,92 @@ class FallbackQuestions {
       ],
       correctAnswerIndex: 1,
     ),
+    QuestionModel(
+      question: 'Which SQL keyword returns the number of rows in a table?',
+      options: ['COUNT()', 'NUMBER()', 'ROWS()', 'SIZE()'],
+      correctAnswerIndex: 0,
+    ),
+    QuestionModel(
+      question: 'Which SQL operator is used to search for a pattern?',
+      options: ['SEARCH', 'LIKE', 'FIND', 'MATCH'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question:
+          'Which SQL keyword is used to specify multiple values in WHERE?',
+      options: ['BETWEEN', 'IN', 'RANGE', 'VALUES'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which SQL command is used to remove a table?',
+      options: ['REMOVE TABLE', 'DELETE TABLE', 'DROP TABLE', 'CLEAR TABLE'],
+      correctAnswerIndex: 2,
+    ),
+    QuestionModel(
+      question: 'What is the default sorting order of ORDER BY?',
+      options: ['Random', 'Ascending', 'Descending', 'None'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which SQL clause is used with aggregate functions?',
+      options: ['WHERE', 'IF', 'HAVING', 'FILTER'],
+      correctAnswerIndex: 2,
+    ),
+    QuestionModel(
+      question: 'Which SQL keyword is used to join tables?',
+      options: ['MERGE', 'JOIN', 'CONNECT', 'LINK'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question:
+          'Which wildcard character represents any sequence of characters?',
+      options: ['*', '%', '_', '?'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which SQL function returns the smallest value?',
+      options: ['SMALL()', 'MIN()', 'LEAST()', 'LOWER()'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which SQL statement is used to change existing data?',
+      options: ['CHANGE', 'UPDATE', 'MODIFY', 'ALTER'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is a primary key?',
+      options: [
+        'First column',
+        'Unique identifier for a record',
+        'Foreign key reference',
+        'Index column',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which SQL clause groups rows with same values?',
+      options: ['CLUSTER BY', 'GROUP BY', 'COLLECT BY', 'MERGE BY'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which SQL keyword is used to limit the number of rows?',
+      options: ['MAX', 'LIMIT', 'TOP', 'FIRST'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which SQL operator checks if a value is NULL?',
+      options: ['= NULL', 'IS NULL', '== NULL', 'NULL()'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question:
+          'Which SQL keyword combines results from multiple SELECT statements?',
+      options: ['COMBINE', 'MERGE', 'UNION', 'JOIN'],
+      correctAnswerIndex: 2,
+    ),
   ];
 
-  // SQL Hard Questions
+  // SQL Hard Questions (30 questions with advanced logic)
   static final List<QuestionModel> _sqlHard = [
     QuestionModel(
       question: 'What is the difference between INNER JOIN and OUTER JOIN?',
@@ -189,26 +240,6 @@ class FallbackQuestions {
       correctAnswerIndex: 2,
     ),
     QuestionModel(
-      question: 'What is a database index primarily used for?',
-      options: [
-        'Data backup',
-        'Improve query performance',
-        'Data encryption',
-        'Table relationships',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is the purpose of a SQL view?',
-      options: [
-        'Store data permanently',
-        'Virtual table based on result-set of an SQL statement',
-        'Backup mechanism',
-        'Transaction log',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
       question: 'What does ACID stand for in database transactions?',
       options: [
         'Atomicity, Consistency, Isolation, Durability',
@@ -219,32 +250,12 @@ class FallbackQuestions {
       correctAnswerIndex: 0,
     ),
     QuestionModel(
-      question: 'What is a stored procedure?',
-      options: [
-        'A temporary table',
-        'A prepared SQL statement that can be saved and reused',
-        'A database backup',
-        'A type of index',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
       question: 'What is the difference between DELETE and TRUNCATE?',
       options: [
         'No difference',
         'DELETE can be rolled back, TRUNCATE cannot; TRUNCATE is faster',
         'TRUNCATE is slower',
         'DELETE removes table structure',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is a foreign key constraint?',
-      options: [
-        'Uniqueness constraint',
-        'Reference to primary key in another table',
-        'Index type',
-        'Data type',
       ],
       correctAnswerIndex: 1,
     ),
@@ -259,16 +270,6 @@ class FallbackQuestions {
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is a subquery?',
-      options: [
-        'A query within another query',
-        'A type of JOIN',
-        'A table alias',
-        'An index optimization',
-      ],
-      correctAnswerIndex: 0,
-    ),
-    QuestionModel(
       question: 'What is a correlated subquery?',
       options: [
         'A subquery that executes once',
@@ -279,7 +280,7 @@ class FallbackQuestions {
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is database normalization?',
+      question: 'What is database normalization primarily used for?',
       options: [
         'Data backup process',
         'Process of organizing data to reduce redundancy',
@@ -368,45 +369,166 @@ class FallbackQuestions {
       ],
       correctAnswerIndex: 1,
     ),
-  ];
-
-  // Flutter Easy Questions
-  static final List<QuestionModel> _flutterEasy = [
     QuestionModel(
-      question: 'What is Flutter?',
+      question:
+          'If table A has 5 rows and table B has 3 rows, how many rows will CROSS JOIN produce?',
+      options: ['5', '3', '15', '8'],
+      correctAnswerIndex: 2,
+    ),
+    QuestionModel(
+      question: 'What is the result of: SELECT NULL = NULL?',
+      options: ['TRUE', 'FALSE', 'NULL', 'Error'],
+      correctAnswerIndex: 2,
+    ),
+    QuestionModel(
+      question:
+          'Which isolation level prevents dirty reads but allows non-repeatable reads?',
       options: [
-        'A backend framework',
-        'An open-source UI toolkit by Google',
-        'A database',
-        'A programming language',
+        'READ UNCOMMITTED',
+        'READ COMMITTED',
+        'REPEATABLE READ',
+        'SERIALIZABLE',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'Which programming language is used in Flutter?',
-      options: ['Java', 'Kotlin', 'Dart', 'Swift'],
+      question:
+          'What happens when you use GROUP BY without aggregate functions?',
+      options: [
+        'Error occurs',
+        'Returns distinct values',
+        'Returns all rows',
+        'Returns NULL',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'In a self-join, what must be different?',
+      options: ['Table names', 'Table aliases', 'Column names', 'Data types'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the maximum number of clustered indexes per table?',
+      options: ['0', '1', '2', 'Unlimited'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which JOIN type returns all rows from both tables?',
+      options: ['INNER JOIN', 'LEFT JOIN', 'FULL OUTER JOIN', 'CROSS JOIN'],
       correctAnswerIndex: 2,
     ),
+    QuestionModel(
+      question: 'What is the purpose of SAVEPOINT in transactions?',
+      options: [
+        'Save database',
+        'Set a point to rollback to within a transaction',
+        'Create backup',
+        'Lock tables',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What does the RANK() window function do with ties?',
+      options: [
+        'Skips ranks after ties',
+        'Assigns same rank without skipping',
+        'Assigns different ranks',
+        'Returns error',
+      ],
+      correctAnswerIndex: 0,
+    ),
+    QuestionModel(
+      question:
+          'Which constraint ensures all values in a column are different?',
+      options: ['PRIMARY KEY', 'UNIQUE', 'CHECK', 'NOT NULL'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is a covering index?',
+      options: [
+        'Index on all columns',
+        'Index that contains all columns needed for a query',
+        'Primary key index',
+        'Composite index',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What does PIVOT operation do?',
+      options: [
+        'Rotates table',
+        'Transforms rows into columns',
+        'Sorts data',
+        'Joins tables',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which statement is correct about views?',
+      options: [
+        'Views store actual data',
+        'Views are virtual tables based on SQL query',
+        'Views cannot be updated',
+        'Views require more storage',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the difference between WHERE and HAVING with COUNT?',
+      options: [
+        'No difference',
+        'WHERE filters before grouping, HAVING filters after',
+        'HAVING is faster',
+        'WHERE cannot use COUNT',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is an execution plan in SQL?',
+      options: [
+        'Code template',
+        'Database optimizer\'s strategy to execute query',
+        'Transaction log',
+        'Backup schedule',
+      ],
+      correctAnswerIndex: 1,
+    ),
+  ];
+
+  // Flutter Easy Questions - Widget Logic Focus (30 questions)
+  static final List<QuestionModel> _flutterEasy = [
     QuestionModel(
       question: 'What is a Widget in Flutter?',
       options: [
         'A function',
-        'A building block of UI',
+        'The basic building block of Flutter UI',
         'A database table',
         'A state manager',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'Which widget is used for scrollable list in Flutter?',
-      options: ['Container', 'ListView', 'Column', 'Stack'],
+      question:
+          'Which widget should you use for a button that responds to taps?',
+      options: [
+        'GestureDetector',
+        'ElevatedButton',
+        'Both are correct',
+        'Container',
+      ],
+      correctAnswerIndex: 2,
+    ),
+    QuestionModel(
+      question:
+          'Which widget is best for displaying a scrollable list of items?',
+      options: ['Column', 'ListView', 'Stack', 'Row'],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
       question: 'What does StatelessWidget mean?',
       options: [
         'Widget with mutable state',
-        'Widget that cannot change',
+        'Widget whose properties cannot change over time',
         'Widget without UI',
         'Widget for navigation',
       ],
@@ -416,297 +538,268 @@ class FallbackQuestions {
       question: 'What does StatefulWidget mean?',
       options: [
         'Widget that never changes',
-        'Widget with mutable state',
+        'Widget that can change its state during runtime',
         'Widget for backend',
         'Widget for routing',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'Which method is called to update the UI in StatefulWidget?',
-      options: ['update()', 'setState()', 'rebuild()', 'refresh()'],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is the purpose of the Scaffold widget?',
-      options: [
-        'Database connection',
-        'Provides basic material design structure',
-        'State management',
-        'Animation',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'Which widget is used to display text in Flutter?',
-      options: ['Label', 'Text', 'TextView', 'TextWidget'],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is the main.dart file?',
-      options: [
-        'Configuration file',
-        'Entry point of Flutter app',
-        'Test file',
-        'Asset file',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'Which widget is used for buttons in Flutter?',
-      options: ['Button', 'ElevatedButton', 'ClickButton', 'PressButton'],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is Hot Reload in Flutter?',
-      options: [
-        'App restart',
-        'Quickly see code changes without losing state',
-        'Database refresh',
-        'UI reset',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question:
-          'Which widget is used for layout with multiple children in a row?',
+      question: 'Which widget arranges children horizontally?',
       options: ['Column', 'Row', 'Stack', 'ListView'],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question:
-          'Which widget is used for layout with multiple children in a column?',
+      question: 'Which widget arranges children vertically?',
       options: ['Row', 'Column', 'Stack', 'GridView'],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is pubspec.yaml used for?',
-      options: [
-        'Code configuration',
-        'Package dependencies and project metadata',
-        'UI design',
-        'Testing',
-      ],
+      question: 'Which widget allows children to overlap each other?',
+      options: ['Row', 'Column', 'Stack', 'Container'],
+      correctAnswerIndex: 2,
+    ),
+    QuestionModel(
+      question: 'Which widget is used to add space around another widget?',
+      options: ['Margin', 'Padding', 'SizedBox', 'Container'],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'Which widget is used to add padding in Flutter?',
-      options: ['Margin', 'Padding', 'Space', 'Gap'],
+      question: 'Which widget is used to display text?',
+      options: ['Label', 'Text', 'TextView', 'TextWidget'],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is MaterialApp widget used for?',
-      options: [
-        'Display text',
-        'Root widget for material design apps',
-        'Navigation only',
-        'State management',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'Which widget is used for text input in Flutter?',
+      question: 'Which widget accepts text input from users?',
       options: ['InputText', 'TextField', 'TextInput', 'EditText'],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is the purpose of the Container widget?',
+      question: 'Which widget is used to display images?',
+      options: ['Picture', 'Image', 'ImageView', 'Photo'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the Container widget primarily used for?',
       options: [
-        'List display',
-        'Versatile box model widget',
+        'Display lists',
+        'A versatile widget for layout, decoration, and constraints',
         'Text display',
         'Navigation',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'Which command is used to create a new Flutter project?',
+      question: 'Which widget makes its child scrollable?',
       options: [
-        'flutter new',
-        'flutter create',
-        'flutter init',
-        'flutter start',
+        'Scroll',
+        'SingleChildScrollView',
+        'Scrollable',
+        'ScrollWidget',
       ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question:
+          'Which widget is used for responsive layout based on constraints?',
+      options: ['Container', 'LayoutBuilder', 'ResponsiveWidget', 'MediaQuery'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which widget adds space between widgets?',
+      options: ['Space', 'SizedBox', 'Gap', 'Spacer'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which widget provides Material Design app structure?',
+      options: ['AppBar', 'Scaffold', 'MaterialDesign', 'AppStructure'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which widget displays a circular progress indicator?',
+      options: [
+        'Loader',
+        'CircularProgressIndicator',
+        'ProgressBar',
+        'Loading',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which widget centers its child within itself?',
+      options: ['Align', 'Center', 'Centered', 'Middle'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which widget detects user gestures like tap, drag, swipe?',
+      options: [
+        'TouchDetector',
+        'GestureDetector',
+        'InputHandler',
+        'EventListener',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which widget creates a grid layout?',
+      options: ['GridLayout', 'GridView', 'Grid', 'TableView'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which widget makes a child widget clickable?',
+      options: ['Clickable', 'InkWell', 'Tappable', 'Button'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which widget displays an icon?',
+      options: ['IconWidget', 'Icon', 'IconView', 'Image'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which widget allows widgets to expand in Row or Column?',
+      options: ['Flex', 'Expanded', 'Stretch', 'Fill'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which widget controls the visibility of its child?',
+      options: ['Show', 'Visibility', 'Display', 'Offstage'],
+      correctAnswerIndex: 3,
+    ),
+    QuestionModel(
+      question: 'Which widget adds a border around its child?',
+      options: ['Border', 'Container with BoxDecoration', 'Frame', 'Outline'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which widget creates flexible space in Row or Column?',
+      options: ['Space', 'Spacer', 'Gap', 'Flexible'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question:
+          'Which widget wraps children that overflow into multiple lines?',
+      options: ['WrapWidget', 'Wrap', 'Flow', 'MultiLine'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question:
+          'Which widget aligns its child within itself with custom positioning?',
+      options: ['Position', 'Align', 'Place', 'Locate'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which widget applies opacity to its child?',
+      options: ['Transparent', 'Opacity', 'Alpha', 'Fade'],
       correctAnswerIndex: 1,
     ),
   ];
 
-  // Flutter Hard Questions
+  // Flutter Hard Questions - Advanced Widget Logic (30 questions)
   static final List<QuestionModel> _flutterHard = [
-    QuestionModel(
-      question:
-          'What is the difference between StatelessWidget and StatefulWidget?',
-      options: [
-        'No difference',
-        'StatelessWidget is immutable, StatefulWidget can rebuild with new state',
-        'StatefulWidget is faster',
-        'StatelessWidget handles events better',
-      ],
-      correctAnswerIndex: 1,
-    ),
     QuestionModel(
       question: 'What is the widget tree in Flutter?',
       options: [
         'File structure',
-        'Hierarchical structure of widgets',
+        'Hierarchical structure of widget instances',
         'Database schema',
         'Build configuration',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is the purpose of BuildContext?',
+      question: 'When should you use const constructor for widgets?',
       options: [
-        'Database connection',
-        'Location of widget in widget tree',
-        'Animation controller',
-        'Network client',
+        'Never',
+        'When widget and its properties are immutable at compile time',
+        'Always',
+        'Only for StatefulWidgets',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is InheritedWidget used for?',
+      question:
+          'What happens if you don\'t return a widget from build() method?',
       options: [
-        'UI layout',
-        'Efficiently propagate data down the widget tree',
-        'Navigation',
-        'Animation',
+        'Returns empty widget',
+        'Compilation error',
+        'Runtime error',
+        'Returns null',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is the difference between hot reload and hot restart?',
+      question: 'Why is InheritedWidget important?',
       options: [
-        'No difference',
-        'Hot reload preserves state, hot restart resets app',
-        'Hot restart is faster',
-        'Hot reload resets state',
+        'For UI layout',
+        'Efficiently propagate data down the widget tree without rebuilding',
+        'For navigation',
+        'For animation',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is a Future in Dart/Flutter?',
-      options: [
-        'A widget',
-        'Represents potential value or error available in the future',
-        'A layout tool',
-        'A state manager',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is a Stream in Dart/Flutter?',
-      options: [
-        'Video player',
-        'Sequence of asynchronous events',
-        'Navigation flow',
-        'Animation sequence',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is the purpose of Keys in Flutter?',
+      question: 'What is the purpose of Keys in Flutter widgets?',
       options: [
         'Database keys',
-        'Preserve state when widgets move in tree',
+        'Preserve widget state when widgets move in tree',
         'API keys',
         'Navigation identifiers',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is the const keyword used for in Flutter?',
+      question: 'When should you use GlobalKey?',
       options: [
-        'Variable declaration',
-        'Create compile-time constant widgets for performance',
-        'Type declaration',
-        'Import statement',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is Provider package used for?',
-      options: [
-        'Database access',
-        'State management and dependency injection',
-        'UI layout',
-        'Animation',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is the purpose of GlobalKey?',
-      options: [
-        'Access widgets across the widget tree',
-        'API authentication',
-        'Database indexing',
-        'File path',
-      ],
-      correctAnswerIndex: 0,
-    ),
-    QuestionModel(
-      question: 'What is FutureBuilder used for?',
-      options: [
-        'Navigation',
-        'Build widget based on Future snapshot',
-        'Animation',
-        'Layout',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is StreamBuilder used for?',
-      options: [
-        'Video streaming',
-        'Build widget based on Stream snapshot',
-        'File streaming',
-        'Network monitoring',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is the purpose of dispose() method?',
-      options: [
-        'Delete widget',
-        'Clean up resources when State object is removed',
-        'Refresh UI',
-        'Initialize state',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is an AnimationController?',
-      options: [
-        'Video controller',
-        'Controls animation progress',
-        'Game controller',
-        'Layout controller',
+        'Always',
+        'When you need to access widget state or context from outside',
+        'Never',
+        'Only in StatelessWidgets',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
       question:
-          'What is the difference between mainAxisAlignment and crossAxisAlignment?',
+          'What is the difference between mainAxisSize.min and max in Row/Column?',
       options: [
         'No difference',
-        'mainAxis is primary direction, crossAxis is perpendicular',
-        'mainAxis is horizontal only',
-        'crossAxis is vertical only',
+        'min takes only needed space, max takes all available space',
+        'max is faster',
+        'min is deprecated',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is a Listenable in Flutter?',
+      question: 'In a Stack widget, which positioned widget renders on top?',
       options: [
-        'Audio player',
-        'Object that notifies listeners when it changes',
-        'Event handler',
-        'Database observer',
+        'First child',
+        'Last child in the list',
+        'Largest widget',
+        'Random',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is the purpose of LayoutBuilder?',
+      question: 'What happens when you use Expanded inside Expanded?',
+      options: [
+        'Works fine',
+        'Error - cannot nest Expanded widgets',
+        'Doubles the expansion',
+        'Only outer Expanded works',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the difference between Flexible and Expanded widgets?',
+      options: [
+        'No difference',
+        'Expanded forces child to fill space, Flexible allows child to be smaller',
+        'Flexible is faster',
+        'Expanded is deprecated',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the purpose of LayoutBuilder widget?',
       options: [
         'Create layouts',
         'Build widget tree based on parent constraints',
@@ -716,17 +809,48 @@ class FallbackQuestions {
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is RepaintBoundary used for?',
+      question: 'Why would you use RepaintBoundary?',
       options: [
-        'UI refresh',
+        'For styling',
         'Create separate layer for performance optimization',
-        'Border widget',
-        'Layout boundary',
+        'For borders',
+        'For layout',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is the purpose of didUpdateWidget lifecycle method?',
+      question: 'What happens if you call setState() in a StatelessWidget?',
+      options: [
+        'Works normally',
+        'Compilation error - setState is not available',
+        'Runtime error',
+        'Does nothing',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question:
+          'What is the difference between ListView and SingleChildScrollView with Column?',
+      options: [
+        'No difference',
+        'ListView lazily builds children, SingleChildScrollView builds all at once',
+        'SingleChildScrollView is faster',
+        'ListView is deprecated',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'When does the dispose() method get called in StatefulWidget?',
+      options: [
+        'When app closes',
+        'When State object is permanently removed from tree',
+        'On hot reload',
+        'Every build',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the purpose of the didUpdateWidget lifecycle method?',
       options: [
         'Initialize widget',
         'Called when widget configuration changes',
@@ -735,9 +859,150 @@ class FallbackQuestions {
       ],
       correctAnswerIndex: 1,
     ),
+    QuestionModel(
+      question: 'What happens if you use setState() after dispose()?',
+      options: [
+        'Works normally',
+        'Throws error - setState called after dispose',
+        'Does nothing',
+        'Rebuilds widget',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the difference between FittedBox and AspectRatio?',
+      options: [
+        'No difference',
+        'FittedBox scales child to fit, AspectRatio maintains aspect ratio',
+        'FittedBox is faster',
+        'AspectRatio is deprecated',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Why would you use CustomPaint widget?',
+      options: [
+        'Change colors',
+        'Draw custom graphics using Canvas',
+        'Add padding',
+        'Create layouts',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the purpose of NotificationListener widget?',
+      options: [
+        'Display notifications',
+        'Listen to notifications bubbling up the tree',
+        'Push notifications',
+        'Error handling',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'In ListView.builder, when is itemBuilder called?',
+      options: [
+        'Once for all items',
+        'Lazily when item is about to be visible',
+        'On app start',
+        'Never',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question:
+          'What happens if you return different widget types based on conditions in build()?',
+      options: [
+        'Error',
+        'Works fine - Flutter handles widget tree changes',
+        'Only first widget renders',
+        'State is lost',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the purpose of AnimatedBuilder widget?',
+      options: [
+        'Create animations automatically',
+        'Rebuild widget when animation value changes',
+        'Animate colors only',
+        'Deprecated widget',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Why would you use ValueKey over ObjectKey?',
+      options: [
+        'No difference',
+        'ValueKey compares by value, ObjectKey by identity',
+        'ValueKey is faster',
+        'ObjectKey is deprecated',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the difference between WillPopScope and PopScope?',
+      options: [
+        'No difference',
+        'PopScope is newer API replacing WillPopScope',
+        'WillPopScope is faster',
+        'Both are deprecated',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'When should you use SliverList over ListView?',
+      options: [
+        'Always',
+        'When building custom scrollable layouts with other slivers',
+        'Never',
+        'Only for small lists',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What happens if you use context after widget is unmounted?',
+      options: [
+        'Works normally',
+        'Throws error or unexpected behavior',
+        'Does nothing',
+        'Returns null',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Why would you use Builder widget?',
+      options: [
+        'Build faster',
+        'Obtain new BuildContext within the same build method',
+        'Add decorations',
+        'Create layouts',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the purpose of ConstrainedBox widget?',
+      options: [
+        'Add constraints',
+        'Impose additional constraints on its child',
+        'Remove constraints',
+        'Check constraints',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'How does ListView.separated differ from ListView.builder?',
+      options: [
+        'No difference',
+        'ListView.separated adds separator between items',
+        'ListView.separated is faster',
+        'ListView.builder is deprecated',
+      ],
+      correctAnswerIndex: 1,
+    ),
   ];
 
-  // Dart Easy Questions
+  // Dart Easy Questions (30 questions)
   static final List<QuestionModel> _dartEasy = [
     QuestionModel(
       question: 'What is Dart?',
@@ -780,16 +1045,6 @@ class FallbackQuestions {
       correctAnswerIndex: 0,
     ),
     QuestionModel(
-      question: 'What is the correct way to create a list in Dart?',
-      options: [
-        'List list = []',
-        'var list = []',
-        'Both are correct',
-        'Neither is correct',
-      ],
-      correctAnswerIndex: 2,
-    ),
-    QuestionModel(
       question: 'Which keyword is used for inheritance in Dart?',
       options: ['implements', 'extends', 'inherits', 'derives'],
       correctAnswerIndex: 1,
@@ -810,29 +1065,9 @@ class FallbackQuestions {
       correctAnswerIndex: 2,
     ),
     QuestionModel(
-      question: 'What is the correct way to define a function in Dart?',
-      options: [
-        'function name() {}',
-        'void name() {}',
-        'def name() {}',
-        'fun name() {}',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
       question: 'Which keyword is used for asynchronous operations in Dart?',
       options: ['async', 'asynchronous', 'await', 'future'],
       correctAnswerIndex: 0,
-    ),
-    QuestionModel(
-      question: 'What is the correct way to create a Map in Dart?',
-      options: [
-        'Map map = {}',
-        'var map = {}',
-        'Both are correct',
-        'Neither is correct',
-      ],
-      correctAnswerIndex: 2,
     ),
     QuestionModel(
       question: 'Which operator is used for type checking in Dart?',
@@ -850,16 +1085,6 @@ class FallbackQuestions {
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'Which loop is used to iterate over collections in Dart?',
-      options: ['forEach', 'for-in', 'Both are correct', 'loop'],
-      correctAnswerIndex: 2,
-    ),
-    QuestionModel(
-      question: 'What is the default access modifier in Dart?',
-      options: ['private', 'public', 'protected', 'default'],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
       question: 'How do you make a variable private in Dart?',
       options: [
         'Use private keyword',
@@ -869,9 +1094,119 @@ class FallbackQuestions {
       ],
       correctAnswerIndex: 1,
     ),
+    QuestionModel(
+      question: 'What is the correct way to create a List in Dart?',
+      options: [
+        'List list = []',
+        'var list = []',
+        'Both are correct',
+        'Neither is correct',
+      ],
+      correctAnswerIndex: 2,
+    ),
+    QuestionModel(
+      question: 'What is the correct way to create a Map in Dart?',
+      options: [
+        'Map map = {}',
+        'var map = {}',
+        'Both are correct',
+        'Neither is correct',
+      ],
+      correctAnswerIndex: 2,
+    ),
+    QuestionModel(
+      question: 'Which data type represents true or false in Dart?',
+      options: ['boolean', 'bool', 'bit', 'binary'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the default access modifier in Dart?',
+      options: ['private', 'public', 'protected', 'default'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which loop is best for iterating over collections in Dart?',
+      options: ['while', 'for-in', 'do-while', 'loop'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What does the String type represent in Dart?',
+      options: [
+        'A number',
+        'A sequence of characters',
+        'A boolean',
+        'A collection',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which operator is used for string concatenation?',
+      options: ['&', '+', '.', ','],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the purpose of the return keyword?',
+      options: [
+        'Exit loop',
+        'Return value from function',
+        'Return to previous line',
+        'Restart function',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which keyword is used to handle exceptions?',
+      options: ['catch', 'error', 'exception', 'handle'],
+      correctAnswerIndex: 0,
+    ),
+    QuestionModel(
+      question: 'What is the purpose of the break statement?',
+      options: [
+        'Break code',
+        'Exit loop or switch statement',
+        'Pause execution',
+        'Return value',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the purpose of the continue statement?',
+      options: [
+        'Continue program',
+        'Skip current iteration and continue loop',
+        'Exit loop',
+        'Return value',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which operator is used for equality comparison?',
+      options: ['=', '==', '===', 'equals'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is a constructor in Dart?',
+      options: [
+        'A function',
+        'Special method to create objects',
+        'A variable',
+        'A loop',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which operator is used for logical AND?',
+      options: ['&', '&&', 'and', 'AND'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which operator is used for logical OR?',
+      options: ['|', '||', 'or', 'OR'],
+      correctAnswerIndex: 1,
+    ),
   ];
 
-  // Dart Hard Questions
+  // Dart Hard Questions (30 questions with advanced logic)
   static final List<QuestionModel> _dartHard = [
     QuestionModel(
       question: 'What is the difference between const and final in Dart?',
@@ -927,19 +1262,9 @@ class FallbackQuestions {
       question: 'What is the purpose of the factory constructor?',
       options: [
         'Create objects',
-        'Return instance from cache or create new one',
+        'Return instance from cache or create new one with custom logic',
         'Initialize variables',
         'Call parent constructor',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is covariance in Dart generics?',
-      options: [
-        'Type safety',
-        'Generic type parameter can be replaced with subtype',
-        'Variable declaration',
-        'Class inheritance',
       ],
       correctAnswerIndex: 1,
     ),
@@ -957,7 +1282,7 @@ class FallbackQuestions {
       question: 'What is a callable class in Dart?',
       options: [
         'Abstract class',
-        'Class that can be called like a function',
+        'Class that can be called like a function using call() method',
         'Static class',
         'Final class',
       ],
@@ -974,10 +1299,10 @@ class FallbackQuestions {
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is isolate in Dart?',
+      question: 'What is an isolate in Dart?',
       options: [
         'Class type',
-        'Independent worker with own memory',
+        'Independent worker with own memory for concurrency',
         'Function type',
         'Variable scope',
       ],
@@ -997,7 +1322,7 @@ class FallbackQuestions {
       question: 'What is a typedef in Dart?',
       options: [
         'Type definition',
-        'Function type alias',
+        'Function type alias for better readability',
         'Class alias',
         'Import alias',
       ],
@@ -1017,39 +1342,9 @@ class FallbackQuestions {
       question: 'What is a Completer in Dart?',
       options: [
         'Function',
-        'Manually complete a Future',
+        'Manually complete a Future with value or error',
         'Class type',
         'Loop construct',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is the difference between runtimeType and Type?',
-      options: [
-        'No difference',
-        'runtimeType gets actual type at runtime, Type is type annotation',
-        'Type is faster',
-        'runtimeType is deprecated',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is a sealed class concept (in newer Dart)?',
-      options: [
-        'Private class',
-        'Class that can only be extended in same library',
-        'Final class',
-        'Abstract class',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is the purpose of the covariant keyword?',
-      options: [
-        'Type checking',
-        'Override method with more specific parameter type',
-        'Generic constraint',
-        'Inheritance modifier',
       ],
       correctAnswerIndex: 1,
     ),
@@ -1064,407 +1359,598 @@ class FallbackQuestions {
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question:
-          'What is the difference between Future.wait and Future.wait all?',
-      options: [
-        'wait waits for all, waitAll is not a method',
-        'No difference, same method',
-        'waitAll is faster',
-        'wait is deprecated',
-      ],
-      correctAnswerIndex: 0,
+      question: 'What will print: var x = 5; print(x++ + ++x);?',
+      options: ['10', '11', '12', '13'],
+      correctAnswerIndex: 2,
     ),
-  ];
-
-  // General Programming Easy Questions
-  static final List<QuestionModel> _generalEasy = [
     QuestionModel(
-      question: 'What does CPU stand for?',
-      options: [
-        'Central Process Unit',
-        'Central Processing Unit',
-        'Computer Personal Unit',
-        'Central Processor Unit',
-      ],
+      question: 'What is the result of: null ?? null ?? "default"?',
+      options: ['null', '"default"', 'Error', 'undefined'],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is an algorithm?',
+      question: 'What is covariance in Dart generics?',
       options: [
-        'A programming language',
-        'Step-by-step procedure to solve a problem',
-        'A database',
-        'A compiler',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is a variable in programming?',
-      options: [
-        'A function',
-        'A container for storing data',
-        'A loop',
-        'A class',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is a loop in programming?',
-      options: [
-        'A function',
-        'A structure that repeats code',
-        'A variable',
-        'A condition',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is debugging?',
-      options: [
-        'Writing code',
-        'Finding and fixing errors in code',
-        'Compiling code',
-        'Running code',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is an array?',
-      options: [
-        'A function',
-        'A collection of elements of same type',
-        'A loop',
-        'A condition',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is a function?',
-      options: ['A variable', 'A reusable block of code', 'A loop', 'An array'],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is a compiler?',
-      options: [
-        'A debugger',
-        'Translates source code to machine code',
-        'A text editor',
-        'A database',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is syntax in programming?',
-      options: [
-        'Logic of code',
-        'Rules for writing code',
-        'Variable names',
-        'Function names',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is an IDE?',
-      options: [
-        'A programming language',
-        'Integrated Development Environment',
-        'A database',
-        'A framework',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is a comment in code?',
-      options: [
-        'Executable code',
-        'Non-executable text for documentation',
-        'Error message',
-        'Function name',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is a condition in programming?',
-      options: [
-        'A loop',
-        'A statement that evaluates to true or false',
-        'A function',
-        'A variable',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What does API stand for?',
-      options: [
-        'Application Programming Interface',
-        'Advanced Programming Interface',
-        'Application Process Interface',
-        'Advanced Process Interface',
-      ],
-      correctAnswerIndex: 0,
-    ),
-    QuestionModel(
-      question: 'What is a string in programming?',
-      options: [
-        'A number',
-        'A sequence of characters',
-        'A boolean',
-        'A function',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is a boolean value?',
-      options: ['A number', 'True or False', 'A string', 'An array'],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is an object in programming?',
-      options: ['A function', 'An instance of a class', 'A loop', 'A variable'],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is inheritance in OOP?',
-      options: [
-        'Creating variables',
-        'Acquiring properties from parent class',
-        'Deleting objects',
-        'Running functions',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is a class in programming?',
-      options: [
-        'A function',
-        'A blueprint for creating objects',
-        'A variable',
-        'A loop',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What does RAM stand for?',
-      options: [
-        'Read Access Memory',
-        'Random Access Memory',
-        'Run Access Memory',
-        'Rapid Access Memory',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is a database?',
-      options: [
-        'A programming language',
-        'An organized collection of data',
-        'A function',
-        'A compiler',
-      ],
-      correctAnswerIndex: 1,
-    ),
-  ];
-
-  // General Programming Hard Questions
-  static final List<QuestionModel> _generalHard = [
-    QuestionModel(
-      question: 'What is time complexity in algorithms?',
-      options: [
-        'Execution time',
-        'Measure of how running time grows with input size',
-        'Code length',
-        'Memory usage',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is Big O notation?',
-      options: [
-        'Circle operator',
-        'Describes algorithm performance and complexity',
-        'Loop notation',
-        'Function syntax',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is a stack data structure?',
-      options: [
-        'Random access structure',
-        'LIFO (Last In First Out) structure',
-        'FIFO structure',
-        'Tree structure',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is a queue data structure?',
-      options: [
-        'LIFO structure',
-        'FIFO (First In First Out) structure',
-        'Random access',
-        'Hash table',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is recursion?',
-      options: [
-        'A loop',
-        'Function that calls itself',
+        'Type safety',
+        'Generic type parameter can be replaced with subtype',
         'Variable declaration',
         'Class inheritance',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is polymorphism in OOP?',
+      question: 'What is the purpose of the covariant keyword?',
       options: [
-        'Many classes',
-        'Objects of different types can be accessed through same interface',
-        'Multiple inheritance',
-        'Code duplication',
+        'Type checking',
+        'Override method with more specific parameter type',
+        'Generic constraint',
+        'Inheritance modifier',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is encapsulation in OOP?',
+      question:
+          'What happens when you call super() in a constructor without parameters but parent has required params?',
       options: [
-        'Inheritance',
-        'Bundling data and methods that work on data',
-        'Polymorphism',
-        'Abstraction',
+        'Works fine',
+        'Compilation error',
+        'Runtime error',
+        'Uses default values',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is a hash table?',
+      question:
+          'What is the result of: print(identical("hello", "hel" + "lo"));?',
+      options: ['true', 'false', 'Error', 'null'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is a sealed class in newer Dart versions?',
       options: [
-        'Array',
-        'Data structure that maps keys to values',
-        'Tree',
-        'Stack',
+        'Private class',
+        'Class that can only be extended in same library',
+        'Final class',
+        'Abstract class',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is a binary tree?',
-      options: [
-        'Array with 2 elements',
-        'Tree where each node has at most 2 children',
-        'Two trees',
-        'Binary number system',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is dynamic programming?',
-      options: [
-        'Dynamic typing',
-        'Optimization technique by storing subproblem results',
-        'Runtime programming',
-        'Variable programming',
-      ],
-      correctAnswerIndex: 1,
-    ),
-    QuestionModel(
-      question: 'What is the difference between deep copy and shallow copy?',
+      question: 'What is the difference between sync* and async* generators?',
       options: [
         'No difference',
-        'Deep copy copies nested objects, shallow copy copies references',
-        'Shallow copy is faster always',
-        'Deep copy is deprecated',
+        'sync* returns Iterable synchronously, async* returns Stream asynchronously',
+        'sync* is faster',
+        'async* is deprecated',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is a linked list?',
+      question: 'What happens if you await a non-Future value?',
       options: [
-        'Array',
-        'Linear data structure where elements are linked using pointers',
-        'Tree',
-        'Hash table',
+        'Error',
+        'Returns the value immediately wrapped in completed Future',
+        'Waits indefinitely',
+        'Returns null',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is abstraction in OOP?',
+      question: 'What is the purpose of the show and hide keywords in imports?',
       options: [
-        'Inheritance',
-        'Hiding complex implementation details',
-        'Code duplication',
-        'Variable declaration',
+        'Display control',
+        'Import only specific members or exclude specific members',
+        'Visibility control',
+        'Privacy control',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is a design pattern?',
+      question: 'What will happen: List<int> list = []; list.add("text");?',
       options: [
-        'UI design',
-        'Reusable solution to common software design problem',
-        'Code style',
-        'Database schema',
+        'Works fine',
+        'Compilation error - type mismatch',
+        'Runtime error',
+        'Converts to int',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is a race condition?',
+      question: 'What is the difference between Future.wait and Future.any?',
       options: [
-        'Fast algorithm',
-        'Bug where output depends on timing of events',
-        'Competition',
-        'Loop condition',
+        'No difference',
+        'wait waits for all, any completes when first Future completes',
+        'any is deprecated',
+        'wait is faster',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is deadlock?',
+      question: 'What is the purpose of the @override annotation?',
       options: [
-        'Infinite loop',
-        'Two processes waiting for each other',
-        'Memory leak',
-        'Syntax error',
+        'Required for overriding',
+        'Documents intent and helps catch errors if not actually overriding',
+        'Increases performance',
+        'Makes method private',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is garbage collection?',
+      question: 'What is a record type in Dart 3.0+?',
       options: [
-        'Code cleanup',
-        'Automatic memory management',
+        'Database record',
+        'Anonymous immutable aggregate type',
+        'Audio recording',
+        'Log entry',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What will happen: int? x; print(x! + 5);?',
+      options: [
+        'Prints 5',
+        'Runtime error - null check operator on null',
+        'Compilation error',
+        'Prints null',
+      ],
+      correctAnswerIndex: 1,
+    ),
+  ];
+
+  // Python Easy Questions (30 questions)
+  static final List<QuestionModel> _pythonEasy = [
+    QuestionModel(
+      question: 'What is Python?',
+      options: [
+        'A snake',
+        'A high-level programming language',
+        'A database',
+        'An operating system',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Who created Python?',
+      options: [
+        'Guido van Rossum',
+        'James Gosling',
+        'Dennis Ritchie',
+        'Bjarne Stroustrup',
+      ],
+      correctAnswerIndex: 0,
+    ),
+    QuestionModel(
+      question: 'Which function is used to display output in Python?',
+      options: ['echo()', 'print()', 'display()', 'show()'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'How do you create a variable in Python?',
+      options: ['var x = 5', 'int x = 5', 'x = 5', 'declare x = 5'],
+      correctAnswerIndex: 2,
+    ),
+    QuestionModel(
+      question: 'What is the correct file extension for Python files?',
+      options: ['.pt', '.py', '.python', '.pyt'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which keyword is used to create a function in Python?',
+      options: ['function', 'def', 'func', 'define'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'How do you create a comment in Python?',
+      options: ['// comment', '/* comment */', '# comment', '-- comment'],
+      correctAnswerIndex: 2,
+    ),
+    QuestionModel(
+      question: 'Which data type is used for whole numbers in Python?',
+      options: ['integer', 'int', 'number', 'whole'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which data type is used for decimal numbers in Python?',
+      options: ['decimal', 'float', 'double', 'real'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the correct way to create a list in Python?',
+      options: ['list = ()', 'list = []', 'list = {}', 'list = <>'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the correct way to create a dictionary in Python?',
+      options: ['dict = []', 'dict = ()', 'dict = {}', 'dict = <>'],
+      correctAnswerIndex: 2,
+    ),
+    QuestionModel(
+      question: 'Which keyword is used for conditional statements in Python?',
+      options: ['if', 'when', 'condition', 'check'],
+      correctAnswerIndex: 0,
+    ),
+    QuestionModel(
+      question: 'Which loop is used to iterate over a sequence in Python?',
+      options: ['foreach', 'for', 'iterate', 'loop'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'How do you get user input in Python?',
+      options: ['scan()', 'input()', 'read()', 'get()'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which operator is used for exponentiation in Python?',
+      options: ['^', '**', 'pow', 'exp'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the result of: 10 // 3 in Python?',
+      options: ['3.33', '3', '4', '3.0'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which method is used to add an item to a list?',
+      options: ['add()', 'append()', 'insert()', 'push()'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which method is used to remove an item from a list?',
+      options: ['delete()', 'remove()', 'pop()', 'Both B and C'],
+      correctAnswerIndex: 3,
+    ),
+    QuestionModel(
+      question: 'What is the correct way to create a string in Python?',
+      options: [
+        'text = string()',
+        'text = "hello"',
+        'text = String()',
+        'text = str',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which keyword is used to import a module?',
+      options: ['include', 'import', 'require', 'using'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the result of: len("Python")?',
+      options: ['5', '6', '7', 'Error'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which operator is used for string concatenation?',
+      options: ['&', '+', '.', ','],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which keyword is used to define a class in Python?',
+      options: ['class', 'Class', 'object', 'struct'],
+      correctAnswerIndex: 0,
+    ),
+    QuestionModel(
+      question: 'What is the result of: type(5)?',
+      options: ['int', '<class "int">', 'integer', 'number'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which function converts a string to an integer?',
+      options: ['int()', 'toInt()', 'integer()', 'convert()'],
+      correctAnswerIndex: 0,
+    ),
+    QuestionModel(
+      question: 'What is the result of: bool(0)?',
+      options: ['True', 'False', '0', 'Error'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'Which keyword is used to handle exceptions?',
+      options: ['catch', 'except', 'error', 'handle'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the correct way to create a tuple?',
+      options: ['tuple = []', 'tuple = {}', 'tuple = ()', 'tuple = <>'],
+      correctAnswerIndex: 2,
+    ),
+    QuestionModel(
+      question: 'Which operator checks if value is in a list?',
+      options: ['contains', 'in', 'exists', 'has'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What does the range(5) function generate?',
+      options: [
+        '[1, 2, 3, 4, 5]',
+        '[0, 1, 2, 3, 4]',
+        '[0, 1, 2, 3, 4, 5]',
+        '[1, 2, 3, 4]',
+      ],
+      correctAnswerIndex: 1,
+    ),
+  ];
+
+  // Python Hard Questions (30 questions with advanced logic)
+  static final List<QuestionModel> _pythonHard = [
+    QuestionModel(
+      question: 'What is the difference between list and tuple in Python?',
+      options: [
+        'No difference',
+        'Lists are mutable, tuples are immutable',
+        'Tuples are faster',
+        'Lists cannot store mixed types',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is a decorator in Python?',
+      options: [
+        'A design pattern',
+        'A function that modifies another function',
+        'A class modifier',
+        'A variable type',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the GIL in Python?',
+      options: [
+        'Graphics Interface Library',
+        'Global Interpreter Lock',
+        'General Input Library',
+        'Global Interface Layer',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the difference between deepcopy and copy?',
+      options: [
+        'No difference',
+        'deepcopy copies nested objects, copy creates shallow copy',
+        'copy is faster always',
+        'deepcopy is deprecated',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is a generator in Python?',
+      options: [
+        'Power generator',
+        'Function that returns an iterator using yield',
+        'Code generator',
+        'Random number generator',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the difference between __str__ and __repr__?',
+      options: [
+        'No difference',
+        '__str__ for readable string, __repr__ for unambiguous representation',
+        '__repr__ is deprecated',
+        '__str__ is faster',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is list comprehension in Python?',
+      options: [
+        'List understanding',
+        'Concise way to create lists using expression',
+        'List compression',
+        'List documentation',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the result of: [x**2 for x in range(5)]?',
+      options: [
+        '[0, 1, 4, 9, 16]',
+        '[1, 4, 9, 16, 25]',
+        '[0, 1, 2, 3, 4]',
+        'Error',
+      ],
+      correctAnswerIndex: 0,
+    ),
+    QuestionModel(
+      question: 'What is the purpose of *args in function definition?',
+      options: [
+        'Multiply arguments',
+        'Accept variable number of positional arguments',
+        'Required arguments',
+        'Array arguments',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the purpose of **kwargs in function definition?',
+      options: [
+        'Power operation',
+        'Accept variable number of keyword arguments',
+        'Required keywords',
+        'Key arguments',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is a lambda function?',
+      options: [
+        'Greek letter function',
+        'Anonymous single-expression function',
+        'Lambda calculus',
+        'Loop function',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the difference between is and == in Python?',
+      options: [
+        'No difference',
+        'is checks identity, == checks equality',
+        '== is faster',
+        'is is deprecated',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What does the @staticmethod decorator do?',
+      options: [
+        'Makes variable static',
+        'Creates method that doesn\'t access instance or class',
+        'Static import',
+        'Static typing',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What does the @classmethod decorator do?',
+      options: [
+        'Creates class',
+        'Method that receives class as first argument',
+        'Class documentation',
+        'Class validation',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the purpose of __init__ method?',
+      options: [
+        'Initialize program',
+        'Constructor method to initialize object',
+        'Import initialization',
+        'Interface method',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is monkey patching in Python?',
+      options: [
         'Bug fixing',
+        'Dynamic modification of class or module at runtime',
         'Code optimization',
+        'Unit testing',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is a mutex?',
+      question: 'What is the result of: [] or [1] or [2]?',
+      options: ['[]', '[1]', '[2]', 'Error'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is a context manager in Python?',
       options: [
-        'Data type',
-        'Mutual exclusion object for thread synchronization',
-        'Function',
-        'Variable',
+        'Context menu',
+        'Object that manages resources using with statement',
+        'Content manager',
+        'Configuration manager',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is the singleton pattern?',
+      question: 'What is the purpose of __enter__ and __exit__ methods?',
       options: [
-        'One variable',
-        'Design pattern ensuring class has only one instance',
-        'One function',
-        'Single inheritance',
+        'Entry and exit points',
+        'Define context manager protocol',
+        'Login and logout',
+        'Import and export',
       ],
       correctAnswerIndex: 1,
     ),
     QuestionModel(
-      question: 'What is the difference between process and thread?',
+      question: 'What is metaclass in Python?',
+      options: [
+        'Meta programming',
+        'Class of a class that defines class behavior',
+        'Multiple classes',
+        'Meta data',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the difference between append() and extend()?',
       options: [
         'No difference',
-        'Process has own memory, thread shares memory',
-        'Thread is faster always',
-        'Process is deprecated',
+        'append adds element, extend adds iterable elements',
+        'extend is faster',
+        'append is deprecated',
       ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the result of: {x: x**2 for x in range(3)}?',
+      options: ['{0:0, 1:1, 2:4}', '[0, 1, 4]', '(0, 1, 4)', 'Error'],
+      correctAnswerIndex: 0,
+    ),
+    QuestionModel(
+      question: 'What is the difference between remove() and pop()?',
+      options: [
+        'No difference',
+        'remove() by value, pop() by index and returns value',
+        'pop() is faster',
+        'remove() is deprecated',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is slicing in Python?',
+      options: [
+        'Cutting strings',
+        'Extract portion of sequence using [start:end:step]',
+        'Dividing numbers',
+        'Array splitting',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the result of: "hello"[::-1]?',
+      options: ['"hello"', '"olleh"', '"hlo"', 'Error'],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is a closure in Python?',
+      options: [
+        'Closing file',
+        'Function that captures variables from enclosing scope',
+        'Loop closure',
+        'Class closing',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What happens when you modify a list during iteration?',
+      options: [
+        'Works fine',
+        'Can cause unexpected behavior or skip elements',
+        'Automatic copy',
+        'Error always',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the purpose of __name__ == "__main__"?',
+      options: [
+        'Name check',
+        'Check if script is run directly vs imported',
+        'Main function',
+        'Name validation',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the difference between sort() and sorted()?',
+      options: [
+        'No difference',
+        'sort() modifies in-place, sorted() returns new sorted list',
+        'sorted() is faster',
+        'sort() is deprecated',
+      ],
+      correctAnswerIndex: 1,
+    ),
+    QuestionModel(
+      question: 'What is the result of: [1, 2] * 2?',
+      options: ['[2, 4]', '[1, 2, 1, 2]', '[1, 2, 2]', 'Error'],
       correctAnswerIndex: 1,
     ),
   ];

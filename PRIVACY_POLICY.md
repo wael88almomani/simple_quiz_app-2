@@ -1,10 +1,10 @@
-# Privacy Policy for Exam Master
+# Privacy Policy for ExaCode
 
-**Last Updated:** January 26, 2026
+**Last updated:** January 27, 2026
 
 ## Introduction
 
-This privacy policy applies to the Exam Master mobile application (hereby referred to as "Application") for mobile devices that was created by Wa'el Almomani (hereby referred to as "Service Provider") as a Free service.
+This privacy policy applies to the ExaCode mobile application (hereby referred to as "Application") for mobile devices that was created by Wa'el Almomani (hereby referred to as "Service Provider") as a Free service.
 
 This policy is intended to inform users of our policies regarding the collection, use, and disclosure of information if anyone decides to use our Application.
 
@@ -23,7 +23,7 @@ This data is stored exclusively on your device and is **never transmitted** to a
 
 ## No Internet Connection Required
 
-Exam Master is a **100% offline application**. It does not require an internet connection to function and does not communicate with any external servers.
+ExaCode is a **100% offline application**. It does not require an internet connection to function and does not communicate with any external servers.
 
 ## Data Security
 
@@ -95,4 +95,4 @@ As a user, you have the following rights:
 ✅ **You control your data** - You can delete it anytime  
 ✅ **No third parties** - We don't share data with anyone  
 
-Your privacy is important to us. Exam Master is designed to be a completely private, offline learning tool.
+Your privacy is important to us. ExaCode is designed to be a completely private, offline learning tool.

@@ -1,4 +1,4 @@
-package com.exammaster.quizapp
+package com.waelalmomani.exacode
 
 import io.flutter.embedding.android.FlutterActivity
 

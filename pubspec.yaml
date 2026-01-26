@@ -1,5 +1,5 @@
 name: simple_quiz_app_2
-description: "Exam Master - Comprehensive quiz app for learning SQL, Flutter, Dart, and Programming with 160+ questions."
+description: "ExaCode - Advanced programming quiz app for mastering SQL, Flutter, Dart, and Python with 240 challenging questions."
 publish_to: 'none'
 
 # The following defines the version and build number for your application.
@@ -76,7 +76,7 @@ flutter_launcher_icons:
   ios: true
   image_path: "assets/icon/app_icon.png"
   adaptive_icon_background: "#6200EA"
-  adaptive_icon_foreground: "assets/icon/app_icon_foreground.png"
+  adaptive_icon_foreground: "assets/icon/app_icon.png"
 
   # To add assets to your application, add an assets section, like this:
   # assets:

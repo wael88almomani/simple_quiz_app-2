@@ -62,7 +62,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   const Icon(Icons.school, size: 64, color: AppTheme.textLight),
                   const SizedBox(height: 16),
                   const Text(
-                    'Welcome to Exam Master',
+                    'Welcome to ExaCode',
                     style: TextStyle(
                       fontSize: 24,
                       fontWeight: FontWeight.bold,
@@ -233,7 +233,7 @@ class _HomeScreenState extends State<HomeScreen> {
         return Icons.flutter_dash;
       case 'Dart':
         return Icons.code;
-      case 'General Programming':
+      case 'Python':
         return Icons.computer;
       default:
         return Icons.book;

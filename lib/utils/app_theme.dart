@@ -27,7 +27,7 @@ class AppTheme {
     'SQL': Color(0xFF2196F3),
     'Flutter': Color(0xFF42A5F5),
     'Dart': Color(0xFF0277BD),
-    'General Programming': Color(0xFF1976D2),
+    'Python': Color(0xFF1976D2),
   };
 
   // Theme Data

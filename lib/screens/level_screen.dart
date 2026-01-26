@@ -125,7 +125,7 @@ class LevelScreen extends StatelessWidget {
                       const SizedBox(height: 12),
                       _buildInfoRow(
                         Icons.question_answer,
-                        '20 questions per exam',
+                        '30 questions per exam',
                       ),
                       _buildInfoRow(Icons.timer, 'No time limit'),
                       _buildInfoRow(Icons.stars, 'Comprehensive question bank'),
@@ -239,7 +239,7 @@ class LevelScreen extends StatelessWidget {
         return Icons.flutter_dash;
       case 'Dart':
         return Icons.code;
-      case 'General Programming':
+      case 'Python':
         return Icons.computer;
       default:
         return Icons.book;

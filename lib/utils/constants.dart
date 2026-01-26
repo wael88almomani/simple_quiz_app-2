@@ -2,19 +2,14 @@
 
 class AppConstants {
   // Categories
-  static const List<String> categories = [
-    'SQL',
-    'Flutter',
-    'Dart',
-    'General Programming',
-  ];
+  static const List<String> categories = ['SQL', 'Flutter', 'Dart', 'Python'];
 
   // Difficulty Levels
   static const String difficultyEasy = 'Easy';
   static const String difficultyHard = 'Hard';
 
   // Quiz Configuration
-  static const int questionsPerExam = 20;
+  static const int questionsPerExam = 30;
   static const int optionsPerQuestion = 4;
 
   // Hive Box Names
@@ -28,7 +23,7 @@ class AppConstants {
   static const String historyRoute = '/history';
 
   // App Info
-  static const String appName = 'Exam Master';
+  static const String appName = 'ExaCode';
   static const String appVersion = '1.0.0';
 
   // Score Thresholds
