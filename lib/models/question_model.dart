@@ -2,6 +2,8 @@ import 'package:hive/hive.dart';
 
 part 'question_model.g.dart';
 
+/// Model representing a quiz question with multiple choice options
+/// Stored in Hive database for caching and offline access
 @HiveType(typeId: 0)
 class QuestionModel extends HiveObject {
   @HiveField(0)
@@ -19,6 +21,7 @@ class QuestionModel extends HiveObject {
     required this.correctAnswerIndex,
   });
 
+  /// Parse question from JSON response
   factory QuestionModel.fromJson(Map<String, dynamic> json) {
     return QuestionModel(
       question: json['question'] as String,

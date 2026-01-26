@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import '../utils/app_theme.dart';
 
+/// Widget representing a single answer option button
+/// Displays option label (A-D) and handles selection state
 class AnswerOption extends StatelessWidget {
   final String optionText;
   final int optionIndex;
@@ -58,7 +60,6 @@ class AnswerOption extends StatelessWidget {
           ),
           child: Row(
             children: [
-              // Option Label (A, B, C, D)
               Container(
                 width: 36,
                 height: 36,

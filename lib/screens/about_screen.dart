@@ -12,7 +12,6 @@ class AboutScreen extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Header Section
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(32),
@@ -47,7 +46,6 @@ class AboutScreen extends StatelessWidget {
 
             const SizedBox(height: 24),
 
-            // Mission Section
             Padding(
               padding: const EdgeInsets.all(16),
               child: Card(
@@ -58,7 +56,7 @@ class AboutScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.lightbulb_outline,
                             color: AppTheme.primaryColor,
                             size: 28,
@@ -76,7 +74,7 @@ class AboutScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       const Text(
-                        'To provide an engaging and effective learning platform that helps students and professionals master various subjects through interactive quizzes and AI-powered question generation.',
+                        'To provide an engaging and effective learning platform that helps students and professionals master various subjects through interactive quizzes and comprehensive question banks.',
                         style: TextStyle(
                           fontSize: 16,
                           color: AppTheme.textSecondary,
@@ -89,7 +87,6 @@ class AboutScreen extends StatelessWidget {
               ),
             ),
 
-            // Features Section
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Card(
@@ -100,7 +97,7 @@ class AboutScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.star_outline,
                             color: AppTheme.primaryColor,
                             size: 28,
@@ -118,14 +115,14 @@ class AboutScreen extends StatelessWidget {
                       ),
                       const SizedBox(height: 16),
                       _buildFeatureItem(
-                        Icons.psychology,
-                        'AI-Powered Questions',
-                        'Get dynamically generated questions tailored to your needs',
+                        Icons.library_books,
+                        'Rich Question Bank',
+                        'Access hundreds of carefully crafted questions across topics',
                       ),
                       _buildFeatureItem(
                         Icons.trending_up,
                         'Multiple Difficulty Levels',
-                        'Choose from Easy, Medium, and Hard difficulty levels',
+                        'Choose from Easy and Hard difficulty levels',
                       ),
                       _buildFeatureItem(
                         Icons.history,
@@ -143,7 +140,6 @@ class AboutScreen extends StatelessWidget {
               ),
             ),
 
-            // Contact Section
             Padding(
               padding: const EdgeInsets.all(16),
               child: Card(
@@ -154,7 +150,7 @@ class AboutScreen extends StatelessWidget {
                     children: [
                       Row(
                         children: [
-                          Icon(
+                          const Icon(
                             Icons.contact_mail,
                             color: AppTheme.primaryColor,
                             size: 28,
@@ -171,8 +167,10 @@ class AboutScreen extends StatelessWidget {
                         ],
                       ),
                       const SizedBox(height: 16),
-                      _buildContactItem(Icons.email, 'Together@Together.com'),
-                      _buildContactItem(Icons.web, 'www.Together.we.go.com'),
+                      _buildContactItem(
+                        Icons.email,
+                        'wael84almomani@gmail.com',
+                      ),
                       _buildContactItem(Icons.phone, '+962787624300'),
                     ],
                   ),
@@ -180,7 +178,6 @@ class AboutScreen extends StatelessWidget {
               ),
             ),
 
-            // Footer
             Padding(
               padding: const EdgeInsets.all(24),
               child: Column(
@@ -197,7 +194,7 @@ class AboutScreen extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
                   const Text(
-                    'Made with using Flutter',
+                    'Made with ❤️ using Flutter',
                     style: TextStyle(
                       fontSize: 14,
                       color: AppTheme.textSecondary,

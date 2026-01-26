@@ -1,5 +1,7 @@
 import '../models/question_model.dart';
 
+/// Local question bank used when AI service is unavailable
+/// Provides 20 questions per category and difficulty level
 class FallbackQuestions {
   static List<QuestionModel> getQuestions(String category, String difficulty) {
     switch (category.toUpperCase()) {

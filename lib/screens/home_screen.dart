@@ -6,6 +6,8 @@ import 'level_screen.dart';
 import 'history_screen.dart';
 import 'about_screen.dart';
 
+/// Main home screen displaying quiz categories
+/// Entry point for starting new quiz sessions
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
 
@@ -45,7 +47,6 @@ class _HomeScreenState extends State<HomeScreen> {
       body: SafeArea(
         child: Column(
           children: [
-            // Header Section
             Container(
               width: double.infinity,
               padding: const EdgeInsets.all(24),
@@ -81,7 +82,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SizedBox(height: 24),
 
-            // Stats Section
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Row(
@@ -98,7 +98,9 @@ class _HomeScreenState extends State<HomeScreen> {
                   Expanded(
                     child: _buildStatCard(
                       'Avg Score',
-                      '${HiveService.getAverageScore().toStringAsFixed(1)}%',
+                      HiveService.getResultsCount() > 0
+                          ? '${HiveService.getAverageScore().toStringAsFixed(1)}%'
+                          : 'N/A',
                       Icons.trending_up,
                       AppTheme.correctColor,
                     ),
@@ -109,7 +111,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SizedBox(height: 24),
 
-            // Categories Section
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
               child: Text(
@@ -120,7 +121,6 @@ class _HomeScreenState extends State<HomeScreen> {
 
             const SizedBox(height: 16),
 
-            // Category Grid
             Expanded(
               child: GridView.builder(
                 padding: const EdgeInsets.all(16),

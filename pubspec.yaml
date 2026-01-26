@@ -1,8 +1,6 @@
 name: simple_quiz_app_2
-description: "A new Flutter project."
-# The following line prevents the package from being accidentally published to
-# pub.dev using `flutter pub publish`. This is preferred for private packages.
-publish_to: 'none' # Remove this line if you wish to publish to pub.dev
+description: "Exam Master - Comprehensive quiz app for learning SQL, Flutter, Dart, and Programming with 160+ questions."
+publish_to: 'none'
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -38,9 +36,6 @@ dependencies:
   # Hive for local storage
   hive: ^2.2.3
   hive_flutter: ^1.1.0
-  
-  # HTTP for AI API calls
-  http: ^1.2.0
 
 dev_dependencies:
   flutter_test:

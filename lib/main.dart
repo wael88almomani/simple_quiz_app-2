@@ -5,20 +5,17 @@ import 'screens/home_screen.dart';
 import 'utils/app_theme.dart';
 import 'utils/constants.dart';
 
+/// Entry point - Initializes Hive database and system configurations
 void main() async {
-  // Ensure Flutter is initialized
   WidgetsFlutterBinding.ensureInitialized();
 
-  // Initialize Hive
   await HiveService.init();
 
-  // Set preferred orientations (portrait only)
   await SystemChrome.setPreferredOrientations([
     DeviceOrientation.portraitUp,
     DeviceOrientation.portraitDown,
   ]);
 
-  // Set system UI overlay style
   SystemChrome.setSystemUIOverlayStyle(
     const SystemUiOverlayStyle(
       statusBarColor: Colors.transparent,

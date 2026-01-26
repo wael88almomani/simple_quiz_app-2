@@ -2,6 +2,8 @@ import 'package:hive/hive.dart';
 
 part 'result_model.g.dart';
 
+/// Model representing quiz result stored in history
+/// Persisted in Hive database for result tracking
 @HiveType(typeId: 1)
 class ResultModel extends HiveObject {
   @HiveField(0)

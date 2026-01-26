@@ -6,6 +6,8 @@ import '../utils/constants.dart';
 import 'home_screen.dart';
 import 'history_screen.dart';
 
+/// Screen displaying quiz results with animations
+/// Saves result to database and shows performance feedback
 class ResultScreen extends StatefulWidget {
   final String category;
   final String difficulty;
@@ -49,6 +51,7 @@ class _ResultScreenState extends State<ResultScreen>
     _animationController.forward();
   }
 
+  /// Calculates and persists quiz result to local database
   Future<void> _saveResult() async {
     final percentage = (widget.score / widget.totalQuestions) * 100;
 

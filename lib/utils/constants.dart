@@ -17,11 +17,6 @@ class AppConstants {
   static const int questionsPerExam = 20;
   static const int optionsPerQuestion = 4;
 
-  // AI Configuration (Replace with your actual API endpoint and key)
-  static const String aiApiEndpoint =
-      'https://api.openai.com/v1/chat/completions';
-  static const String aiApiKey = 'YOUR_API_KEY_HERE';
-
   // Hive Box Names
   static const String resultsBoxName = 'exam_results';
 
@@ -33,7 +28,7 @@ class AppConstants {
   static const String historyRoute = '/history';
 
   // App Info
-  static const String appName = 'Exam Master 2';
+  static const String appName = 'Exam Master';
   static const String appVersion = '1.0.0';
 
   // Score Thresholds

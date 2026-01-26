@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import '../models/question_model.dart';
 import '../utils/app_theme.dart';
 
+/// Widget displaying question text with progress indicator
+/// Shows question number and completion percentage
 class QuestionCard extends StatelessWidget {
   final int questionNumber;
   final int totalQuestions;
@@ -22,7 +24,6 @@ class QuestionCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Question Number
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
@@ -44,7 +45,6 @@ class QuestionCard extends StatelessWidget {
                     ),
                   ),
                 ),
-                // Progress indicator
                 Text(
                   '${((questionNumber / totalQuestions) * 100).toInt()}%',
                   style: TextStyle(
@@ -57,7 +57,6 @@ class QuestionCard extends StatelessWidget {
             ),
             const SizedBox(height: 20),
 
-            // Question Text
             Text(
               question.question,
               style: Theme.of(
@@ -66,7 +65,6 @@ class QuestionCard extends StatelessWidget {
             ),
             const SizedBox(height: 8),
 
-            // Progress bar
             ClipRRect(
               borderRadius: BorderRadius.circular(4),
               child: LinearProgressIndicator(

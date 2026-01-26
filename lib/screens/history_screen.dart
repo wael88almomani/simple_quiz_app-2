@@ -3,6 +3,8 @@ import '../models/result_model.dart';
 import '../services/hive_service.dart';
 import '../utils/app_theme.dart';
 
+/// Screen displaying past quiz results with statistics
+/// Allows viewing history and clearing all records
 class HistoryScreen extends StatefulWidget {
   const HistoryScreen({super.key});
 
@@ -25,6 +27,7 @@ class _HistoryScreenState extends State<HistoryScreen> {
     });
   }
 
+  /// Shows confirmation dialog and clears all quiz history
   Future<void> _clearHistory() async {
     final confirmed = await showDialog<bool>(
       context: context,

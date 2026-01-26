@@ -6,6 +6,8 @@ import '../widgets/question_card.dart';
 import '../widgets/answer_option.dart';
 import 'result_screen.dart';
 
+/// Main quiz screen handling question flow and answer validation
+/// Loads questions from AI service and tracks user progress
 class QuizScreen extends StatefulWidget {
   final String category;
   final String difficulty;
@@ -37,6 +39,7 @@ class _QuizScreenState extends State<QuizScreen> {
     _loadQuestions();
   }
 
+  /// Fetches questions from AI service with error handling
   Future<void> _loadQuestions() async {
     try {
       setState(() {
@@ -68,6 +71,8 @@ class _QuizScreenState extends State<QuizScreen> {
     });
   }
 
+  /// Validates answer selection and moves to next question
+  /// Updates score if answer is correct, finishes quiz on last question
   void _nextQuestion() {
     if (_selectedAnswerIndex == null) {
       ScaffoldMessenger.of(context).showSnackBar(
@@ -156,7 +161,7 @@ class _QuizScreenState extends State<QuizScreen> {
           ),
           const SizedBox(height: 8),
           const Text(
-            'This may take a few seconds',
+            'Preparing your exam',
             style: TextStyle(color: AppTheme.textSecondary),
           ),
         ],
@@ -198,7 +203,6 @@ class _QuizScreenState extends State<QuizScreen> {
 
     return Column(
       children: [
-        // Question Card
         QuestionCard(
           questionNumber: _currentQuestionIndex + 1,
           totalQuestions: _questions.length,
@@ -207,7 +211,6 @@ class _QuizScreenState extends State<QuizScreen> {
 
         const SizedBox(height: 24),
 
-        // Answer Options
         Expanded(
           child: ListView.builder(
             padding: EdgeInsets.zero,
@@ -223,7 +226,6 @@ class _QuizScreenState extends State<QuizScreen> {
           ),
         ),
 
-        // Next Button
         Padding(
           padding: const EdgeInsets.all(16.0),
           child: SizedBox(

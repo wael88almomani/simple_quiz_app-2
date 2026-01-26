@@ -3,6 +3,8 @@ import '../utils/app_theme.dart';
 import '../utils/constants.dart';
 import 'quiz_screen.dart';
 
+/// Screen for selecting quiz difficulty level (Easy or Hard)
+/// Displays category information and navigates to quiz
 class LevelScreen extends StatelessWidget {
   final String category;
 
@@ -18,7 +20,6 @@ class LevelScreen extends StatelessWidget {
         child: SingleChildScrollView(
           child: Column(
             children: [
-              // Header Section
               Container(
                 width: double.infinity,
                 padding: const EdgeInsets.all(24),
@@ -59,7 +60,6 @@ class LevelScreen extends StatelessWidget {
 
               const SizedBox(height: 40),
 
-              // Difficulty Selection
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 16),
                 child: Text(
@@ -70,7 +70,6 @@ class LevelScreen extends StatelessWidget {
 
               const SizedBox(height: 24),
 
-              // Easy Level
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: _buildDifficultyCard(
@@ -85,7 +84,6 @@ class LevelScreen extends StatelessWidget {
 
               const SizedBox(height: 20),
 
-              // Hard Level
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 24),
                 child: _buildDifficultyCard(
@@ -130,10 +128,7 @@ class LevelScreen extends StatelessWidget {
                         '20 questions per exam',
                       ),
                       _buildInfoRow(Icons.timer, 'No time limit'),
-                      _buildInfoRow(
-                        Icons.refresh,
-                        'Different questions each time',
-                      ),
+                      _buildInfoRow(Icons.stars, 'Comprehensive question bank'),
                       _buildInfoRow(Icons.emoji_events, 'Track your progress'),
                     ],
                   ),
