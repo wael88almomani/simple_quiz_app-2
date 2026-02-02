@@ -205,17 +205,6 @@ Copyright (c) 2026 Wa'el Almomani
 **Wa'el Almomani** - wael84almomani@gmail.com
 
 ---
-
-## 🤝 Contributing
-
-1. Fork the project
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Open a Pull Request
-
----
-
 **Built with ❤️ using Flutter**
 
 ⭐ Star this project if you find it helpful!
